@@ -1,0 +1,2067 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/30/2025 1:52:23 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SEWNI-05"
+  DTS:CreatorName="SEWNI-05\Sandali"
+  DTS:DTSID="{55A81942-F86E-4E48-8008-30B92F6C4403}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Accumulating_fact_tables"
+  DTS:PackageType="5"
+  DTS:VersionBuild="13"
+  DTS:VersionGUID="{0A6EB1D4-C838-4563-99D2-03FE2C6F5DFC}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Update accm_txn_complete_time and txn_process_time_hours"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{0E019A9B-76D5-4639-A105-1A532FFB3B77}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update accm_txn_complete_time and txn_process_time_hours"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Derived Column.Inputs[Derived Column Input].Columns[accm_txn_complete_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_complete_time"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join.Outputs[Merge Join Output].Columns[accm_txn_complete_time]" />
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Derived Column.Inputs[Derived Column Input].Columns[accm_txn_create_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_create_time"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join.Outputs[Merge Join Output].Columns[accm_txn_create_time]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Update accm_txn_complete_time and txn_process_time_hours\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Derived Column.Outputs[Derived Column Output].Columns[HourDiff]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Derived Column.Outputs[Derived Column Output].Columns[HourDiff]"
+                      name="HourDiff"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_I4)[DATEDIFF]("hour",#{Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join.Outputs[Merge Join Output].Columns[accm_txn_create_time]},#{Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join.Outputs[Merge Join Output].Columns[accm_txn_complete_time]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_I4)DATEDIFF("hour",accm_txn_create_time,accm_txn_complete_time)</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Update accm_txn_complete_time and txn_process_time_hours\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract complete Time data"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Extract complete Time data"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[TempTxnUpdate]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract complete Time data.Connections[OleDbConnection]"
+                  connectionManagerID="{BE99AD4E-71E5-4F8F-B8D2-3A9DFF225A98}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SEWNI-05_MSSANDALI.StockExchange_DW.sa]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract complete Time data.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract complete Time data.Outputs[OLE DB Source Output].Columns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract complete Time data.Outputs[OLE DB Source Output].ExternalColumns[accm_txn_complete_time]"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract complete Time data.Outputs[OLE DB Source Output].Columns[accm_txn_complete_time]"
+                      name="accm_txn_complete_time"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract complete Time data.Outputs[OLE DB Source Output].Columns[PortfolioID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract complete Time data.Outputs[OLE DB Source Output].ExternalColumns[PortfolioID]"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract complete Time data.Outputs[OLE DB Source Output].Columns[PortfolioID]"
+                      name="PortfolioID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract complete Time data.Outputs[OLE DB Source Output].ExternalColumns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      name="accm_txn_complete_time" />
+                    <externalMetadataColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract complete Time data.Outputs[OLE DB Source Output].ExternalColumns[PortfolioID]"
+                      dataType="i4"
+                      name="PortfolioID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract complete Time data.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract complete Time data.Outputs[OLE DB Source Error Output].Columns[PortfolioID]"
+                      dataType="i4"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract complete Time data.Outputs[OLE DB Source Error Output].Columns[PortfolioID]"
+                      name="PortfolioID" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract complete Time data.Outputs[OLE DB Source Error Output].Columns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract complete Time data.Outputs[OLE DB Source Error Output].Columns[accm_txn_complete_time]"
+                      name="accm_txn_complete_time" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract complete Time data.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract complete Time data.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract complete Time data.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract complete Time data.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Extract Facttable data"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[FactShareHoldersTrades]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Connections[OleDbConnection]"
+                  connectionManagerID="{BE99AD4E-71E5-4F8F-B8D2-3A9DFF225A98}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SEWNI-05_MSSANDALI.StockExchange_DW.sa]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[accm_txn_complete_time]"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[accm_txn_complete_time]"
+                      name="accm_txn_complete_time"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[PortfolioID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[PortfolioID]"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[PortfolioID]"
+                      name="PortfolioID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[ShareHolderSK]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[ShareHolderSK]"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[ShareHolderSK]"
+                      name="ShareHolderSK"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[CreateDateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[CreateDateKey]"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[CreateDateKey]"
+                      name="CreateDateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[SrcPortfolioModifiedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[SrcPortfolioModifiedDate]"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[SrcPortfolioModifiedDate]"
+                      name="SrcPortfolioModifiedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[TradeID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[TradeID]"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[TradeID]"
+                      name="TradeID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[SharesSK]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[SharesSK]"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[SharesSK]"
+                      name="SharesSK"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[BrokerSK]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[BrokerSK]"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[BrokerSK]"
+                      name="BrokerSK"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[TradeDateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[TradeDateKey]"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[TradeDateKey]"
+                      name="TradeDateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[TradeType]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[TradeType]"
+                      length="50"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[TradeType]"
+                      name="TradeType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[Quantity]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[Quantity]"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[Quantity]"
+                      name="Quantity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[PricePerShare]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[PricePerShare]"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[PricePerShare]"
+                      name="PricePerShare"
+                      precision="10"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[ExchangeRate]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[ExchangeRate]"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[ExchangeRate]"
+                      name="ExchangeRate"
+                      precision="10"
+                      scale="4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[CommisionAmount]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[CommisionAmount]"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[CommisionAmount]"
+                      name="CommisionAmount"
+                      precision="10"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[TaxAmount]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[TaxAmount]"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[TaxAmount]"
+                      name="TaxAmount"
+                      precision="10"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[SettlmentDateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[SettlmentDateKey]"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[SettlmentDateKey]"
+                      name="SettlmentDateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[SrcTradeModifiedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[SrcTradeModifiedDate]"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[SrcTradeModifiedDate]"
+                      name="SrcTradeModifiedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[insertDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[insertDate]"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[insertDate]"
+                      name="insertDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[ModifiedDate]"
+                      name="ModifiedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[accm_txn_create_time]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[accm_txn_create_time]"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[accm_txn_create_time]"
+                      name="accm_txn_create_time"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[txn_process_time_hours]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[txn_process_time_hours]"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[txn_process_time_hours]"
+                      name="txn_process_time_hours"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      name="accm_txn_complete_time" />
+                    <externalMetadataColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[PortfolioID]"
+                      dataType="i4"
+                      name="PortfolioID" />
+                    <externalMetadataColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[ShareHolderSK]"
+                      dataType="i4"
+                      name="ShareHolderSK" />
+                    <externalMetadataColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[CreateDateKey]"
+                      dataType="i4"
+                      name="CreateDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[SrcPortfolioModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="SrcPortfolioModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[TradeID]"
+                      dataType="i4"
+                      name="TradeID" />
+                    <externalMetadataColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[SharesSK]"
+                      dataType="i4"
+                      name="SharesSK" />
+                    <externalMetadataColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[BrokerSK]"
+                      dataType="i4"
+                      name="BrokerSK" />
+                    <externalMetadataColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[TradeDateKey]"
+                      dataType="i4"
+                      name="TradeDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[TradeType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="TradeType" />
+                    <externalMetadataColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[Quantity]"
+                      dataType="i4"
+                      name="Quantity" />
+                    <externalMetadataColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[PricePerShare]"
+                      dataType="numeric"
+                      name="PricePerShare"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[ExchangeRate]"
+                      dataType="numeric"
+                      name="ExchangeRate"
+                      precision="10"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[CommisionAmount]"
+                      dataType="numeric"
+                      name="CommisionAmount"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[TaxAmount]"
+                      dataType="numeric"
+                      name="TaxAmount"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[SettlmentDateKey]"
+                      dataType="i4"
+                      name="SettlmentDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[SrcTradeModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="SrcTradeModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[insertDate]"
+                      dataType="dbTimeStamp"
+                      name="insertDate" />
+                    <externalMetadataColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[accm_txn_create_time]"
+                      dataType="dbTimeStamp"
+                      name="accm_txn_create_time" />
+                    <externalMetadataColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].ExternalColumns[txn_process_time_hours]"
+                      dataType="dbTimeStamp"
+                      name="txn_process_time_hours" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[PortfolioID]"
+                      dataType="i4"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[PortfolioID]"
+                      name="PortfolioID" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[ShareHolderSK]"
+                      dataType="i4"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[ShareHolderSK]"
+                      name="ShareHolderSK" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[CreateDateKey]"
+                      dataType="i4"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[CreateDateKey]"
+                      name="CreateDateKey" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[SrcPortfolioModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[SrcPortfolioModifiedDate]"
+                      name="SrcPortfolioModifiedDate" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[TradeID]"
+                      dataType="i4"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[TradeID]"
+                      name="TradeID" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[SharesSK]"
+                      dataType="i4"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[SharesSK]"
+                      name="SharesSK" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[BrokerSK]"
+                      dataType="i4"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[BrokerSK]"
+                      name="BrokerSK" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[TradeDateKey]"
+                      dataType="i4"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[TradeDateKey]"
+                      name="TradeDateKey" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[TradeType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[TradeType]"
+                      name="TradeType" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[Quantity]"
+                      dataType="i4"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[Quantity]"
+                      name="Quantity" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[PricePerShare]"
+                      dataType="numeric"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[PricePerShare]"
+                      name="PricePerShare"
+                      precision="10"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[ExchangeRate]"
+                      dataType="numeric"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[ExchangeRate]"
+                      name="ExchangeRate"
+                      precision="10"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[CommisionAmount]"
+                      dataType="numeric"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[CommisionAmount]"
+                      name="CommisionAmount"
+                      precision="10"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[TaxAmount]"
+                      dataType="numeric"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[TaxAmount]"
+                      name="TaxAmount"
+                      precision="10"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[SettlmentDateKey]"
+                      dataType="i4"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[SettlmentDateKey]"
+                      name="SettlmentDateKey" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[SrcTradeModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[SrcTradeModifiedDate]"
+                      name="SrcTradeModifiedDate" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[insertDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[insertDate]"
+                      name="insertDate" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[ModifiedDate]"
+                      name="ModifiedDate" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[accm_txn_create_time]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[accm_txn_create_time]"
+                      name="accm_txn_create_time" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[accm_txn_complete_time]"
+                      name="accm_txn_complete_time" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[txn_process_time_hours]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[txn_process_time_hours]"
+                      name="txn_process_time_hours" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources."
+              name="Merge Join"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of join to perform."
+                  name="JoinType"
+                  typeConverter="JoinType">2</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of columns in the ordering key."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the null values are treated as equal values."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indicates the requested maximum buffers per input before blocking."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join.Inputs[Merge Join Left Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Left Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join.Inputs[Merge Join Left Input].Columns[PortfolioID]"
+                      cachedDataType="i4"
+                      cachedName="PortfolioID"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[PortfolioID]" />
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join.Inputs[Merge Join Left Input].Columns[accm_txn_create_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_create_time"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[accm_txn_create_time]" />
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join.Inputs[Merge Join Left Input].Columns[txn_process_time_hours]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="txn_process_time_hours"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[txn_process_time_hours]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join.Inputs[Merge Join Right Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Right Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join.Inputs[Merge Join Right Input].Columns[PortfolioID]"
+                      cachedDataType="i4"
+                      cachedName="PortfolioID"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort 1.Outputs[Sort Output].Columns[PortfolioID]" />
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join.Inputs[Merge Join Right Input].Columns[accm_txn_complete_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_complete_time"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort 1.Outputs[Sort Output].Columns[accm_txn_complete_time]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join.Outputs[Merge Join Output]"
+                  isSorted="true"
+                  name="Merge Join Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join.Outputs[Merge Join Output].Columns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join.Outputs[Merge Join Output].Columns[accm_txn_complete_time]"
+                      name="accm_txn_complete_time">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join.Inputs[Merge Join Right Input].Columns[accm_txn_complete_time]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join.Outputs[Merge Join Output].Columns[PortfolioID]"
+                      dataType="i4"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join.Outputs[Merge Join Output].Columns[PortfolioID]"
+                      name="PortfolioID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join.Inputs[Merge Join Left Input].Columns[PortfolioID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join.Outputs[Merge Join Output].Columns[accm_txn_create_time]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join.Outputs[Merge Join Output].Columns[accm_txn_create_time]"
+                      name="accm_txn_create_time">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join.Inputs[Merge Join Left Input].Columns[accm_txn_create_time]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join.Outputs[Merge Join Output].Columns[txn_process_time_hours]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join.Outputs[Merge Join Output].Columns[txn_process_time_hours]"
+                      name="txn_process_time_hours">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join.Inputs[Merge Join Left Input].Columns[txn_process_time_hours]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Update accm_txn_complete_time and txn_process_time_hours\OLE DB Command"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="OLE DB Command"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE FactShareHoldersTrades
+SET 
+  accm_txn_complete_time = ?, 
+  txn_process_time_hours = ?
+WHERE portfolioID = ?
+</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Update accm_txn_complete_time and txn_process_time_hours\OLE DB Command.Connections[OleDbConnection]"
+                  connectionManagerID="{BE99AD4E-71E5-4F8F-B8D2-3A9DFF225A98}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SEWNI-05_MSSANDALI.StockExchange_DW.sa]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Update accm_txn_complete_time and txn_process_time_hours\OLE DB Command.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\OLE DB Command.Inputs[OLE DB Command Input].Columns[accm_txn_complete_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_complete_time"
+                      externalMetadataColumnId="Package\Update accm_txn_complete_time and txn_process_time_hours\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join.Outputs[Merge Join Output].Columns[accm_txn_complete_time]" />
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\OLE DB Command.Inputs[OLE DB Command Input].Columns[HourDiff]"
+                      cachedDataType="i4"
+                      cachedName="HourDiff"
+                      externalMetadataColumnId="Package\Update accm_txn_complete_time and txn_process_time_hours\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Derived Column.Outputs[Derived Column Output].Columns[HourDiff]" />
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\OLE DB Command.Inputs[OLE DB Command Input].Columns[PortfolioID]"
+                      cachedDataType="i4"
+                      cachedName="PortfolioID"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\Update accm_txn_complete_time and txn_process_time_hours\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join.Outputs[Merge Join Output].Columns[PortfolioID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="dbTimeStamp"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      dataType="i4"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      dataType="i4"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Update accm_txn_complete_time and txn_process_time_hours\OLE DB Command.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Update accm_txn_complete_time and txn_process_time_hours\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Update accm_txn_complete_time and txn_process_time_hours\OLE DB Command.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Update accm_txn_complete_time and txn_process_time_hours\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Inputs[Sort Input].Columns[accm_txn_complete_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_complete_time"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[accm_txn_complete_time]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Inputs[Sort Input].Columns[PortfolioID]"
+                      cachedDataType="i4"
+                      cachedName="PortfolioID"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[PortfolioID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Inputs[Sort Input].Columns[ShareHolderSK]"
+                      cachedDataType="i4"
+                      cachedName="ShareHolderSK"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[ShareHolderSK]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Inputs[Sort Input].Columns[CreateDateKey]"
+                      cachedDataType="i4"
+                      cachedName="CreateDateKey"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[CreateDateKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Inputs[Sort Input].Columns[SrcPortfolioModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="SrcPortfolioModifiedDate"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[SrcPortfolioModifiedDate]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Inputs[Sort Input].Columns[TradeID]"
+                      cachedDataType="i4"
+                      cachedName="TradeID"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[TradeID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Inputs[Sort Input].Columns[SharesSK]"
+                      cachedDataType="i4"
+                      cachedName="SharesSK"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[SharesSK]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Inputs[Sort Input].Columns[BrokerSK]"
+                      cachedDataType="i4"
+                      cachedName="BrokerSK"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[BrokerSK]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Inputs[Sort Input].Columns[TradeDateKey]"
+                      cachedDataType="i4"
+                      cachedName="TradeDateKey"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[TradeDateKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Inputs[Sort Input].Columns[TradeType]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="TradeType"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[TradeType]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Inputs[Sort Input].Columns[Quantity]"
+                      cachedDataType="i4"
+                      cachedName="Quantity"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[Quantity]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Inputs[Sort Input].Columns[PricePerShare]"
+                      cachedDataType="numeric"
+                      cachedName="PricePerShare"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[PricePerShare]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Inputs[Sort Input].Columns[ExchangeRate]"
+                      cachedDataType="numeric"
+                      cachedName="ExchangeRate"
+                      cachedPrecision="10"
+                      cachedScale="4"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[ExchangeRate]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Inputs[Sort Input].Columns[CommisionAmount]"
+                      cachedDataType="numeric"
+                      cachedName="CommisionAmount"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[CommisionAmount]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Inputs[Sort Input].Columns[TaxAmount]"
+                      cachedDataType="numeric"
+                      cachedName="TaxAmount"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[TaxAmount]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Inputs[Sort Input].Columns[SettlmentDateKey]"
+                      cachedDataType="i4"
+                      cachedName="SettlmentDateKey"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[SettlmentDateKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Inputs[Sort Input].Columns[SrcTradeModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="SrcTradeModifiedDate"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[SrcTradeModifiedDate]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Inputs[Sort Input].Columns[insertDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="insertDate"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[insertDate]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Inputs[Sort Input].Columns[ModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ModifiedDate"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[ModifiedDate]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Inputs[Sort Input].Columns[accm_txn_create_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_create_time"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[accm_txn_create_time]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Inputs[Sort Input].Columns[txn_process_time_hours]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="txn_process_time_hours"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[txn_process_time_hours]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[accm_txn_complete_time]"
+                      name="accm_txn_complete_time">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[accm_txn_complete_time]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[PortfolioID]"
+                      dataType="i4"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[PortfolioID]"
+                      name="PortfolioID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[PortfolioID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[ShareHolderSK]"
+                      dataType="i4"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[ShareHolderSK]"
+                      name="ShareHolderSK">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[ShareHolderSK]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[CreateDateKey]"
+                      dataType="i4"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[CreateDateKey]"
+                      name="CreateDateKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[CreateDateKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[SrcPortfolioModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[SrcPortfolioModifiedDate]"
+                      name="SrcPortfolioModifiedDate">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[SrcPortfolioModifiedDate]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[TradeID]"
+                      dataType="i4"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[TradeID]"
+                      name="TradeID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[TradeID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[SharesSK]"
+                      dataType="i4"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[SharesSK]"
+                      name="SharesSK">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[SharesSK]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[BrokerSK]"
+                      dataType="i4"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[BrokerSK]"
+                      name="BrokerSK">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[BrokerSK]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[TradeDateKey]"
+                      dataType="i4"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[TradeDateKey]"
+                      name="TradeDateKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[TradeDateKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[TradeType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[TradeType]"
+                      name="TradeType">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[TradeType]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[Quantity]"
+                      dataType="i4"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[Quantity]"
+                      name="Quantity">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[Quantity]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[PricePerShare]"
+                      dataType="numeric"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[PricePerShare]"
+                      name="PricePerShare"
+                      precision="10"
+                      scale="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[PricePerShare]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[ExchangeRate]"
+                      dataType="numeric"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[ExchangeRate]"
+                      name="ExchangeRate"
+                      precision="10"
+                      scale="4">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[ExchangeRate]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[CommisionAmount]"
+                      dataType="numeric"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[CommisionAmount]"
+                      name="CommisionAmount"
+                      precision="10"
+                      scale="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[CommisionAmount]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[TaxAmount]"
+                      dataType="numeric"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[TaxAmount]"
+                      name="TaxAmount"
+                      precision="10"
+                      scale="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[TaxAmount]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[SettlmentDateKey]"
+                      dataType="i4"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[SettlmentDateKey]"
+                      name="SettlmentDateKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[SettlmentDateKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[SrcTradeModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[SrcTradeModifiedDate]"
+                      name="SrcTradeModifiedDate">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[SrcTradeModifiedDate]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[insertDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[insertDate]"
+                      name="insertDate">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[insertDate]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[ModifiedDate]"
+                      name="ModifiedDate">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[ModifiedDate]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[accm_txn_create_time]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[accm_txn_create_time]"
+                      name="accm_txn_create_time">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[accm_txn_create_time]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[txn_process_time_hours]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output].Columns[txn_process_time_hours]"
+                      name="txn_process_time_hours">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output].Columns[txn_process_time_hours]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort 1"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort 1"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort 1.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort 1.Inputs[Sort Input].Columns[accm_txn_complete_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_complete_time"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract complete Time data.Outputs[OLE DB Source Output].Columns[accm_txn_complete_time]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort 1.Inputs[Sort Input].Columns[PortfolioID]"
+                      cachedDataType="i4"
+                      cachedName="PortfolioID"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract complete Time data.Outputs[OLE DB Source Output].Columns[PortfolioID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort 1.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort 1.Outputs[Sort Output].Columns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort 1.Outputs[Sort Output].Columns[accm_txn_complete_time]"
+                      name="accm_txn_complete_time">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Update accm_txn_complete_time and txn_process_time_hours\Extract complete Time data.Outputs[OLE DB Source Output].Columns[accm_txn_complete_time]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort 1.Outputs[Sort Output].Columns[PortfolioID]"
+                      dataType="i4"
+                      lineageId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort 1.Outputs[Sort Output].Columns[PortfolioID]"
+                      name="PortfolioID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Update accm_txn_complete_time and txn_process_time_hours\Extract complete Time data.Outputs[OLE DB Source Output].Columns[PortfolioID]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Update accm_txn_complete_time and txn_process_time_hours.Paths[Derived Column Output]"
+              endId="Package\Update accm_txn_complete_time and txn_process_time_hours\OLE DB Command.Inputs[OLE DB Command Input]"
+              name="Derived Column Output"
+              startId="Package\Update accm_txn_complete_time and txn_process_time_hours\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Update accm_txn_complete_time and txn_process_time_hours.Paths[Merge Join Output]"
+              endId="Package\Update accm_txn_complete_time and txn_process_time_hours\Derived Column.Inputs[Derived Column Input]"
+              name="Merge Join Output"
+              startId="Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join.Outputs[Merge Join Output]" />
+            <path
+              refId="Package\Update accm_txn_complete_time and txn_process_time_hours.Paths[OLE DB Source Output]"
+              endId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Inputs[Sort Input]"
+              name="OLE DB Source Output"
+              startId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Update accm_txn_complete_time and txn_process_time_hours.Paths[OLE DB Source Output1]"
+              endId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort 1.Inputs[Sort Input]"
+              name="OLE DB Source Output"
+              startId="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract complete Time data.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Update accm_txn_complete_time and txn_process_time_hours.Paths[Sort Output]"
+              endId="Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join.Inputs[Merge Join Left Input]"
+              name="Sort Output"
+              startId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort.Outputs[Sort Output]" />
+            <path
+              refId="Package\Update accm_txn_complete_time and txn_process_time_hours.Paths[Sort Output1]"
+              endId="Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join.Inputs[Merge Join Right Input]"
+              name="Sort Output"
+              startId="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort 1.Outputs[Sort Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="368.8,41.6"
+          Id="Package\Update accm_txn_complete_time and txn_process_time_hours"
+          TopLeft="185.499990165234,74.833332851198" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Update accm_txn_complete_time and txn_process_time_hours">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="179.2,41.6"
+          Id="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data"
+          TopLeft="122.999998167157,75.9999988675118" />
+        <NodeLayout
+          Size="204.8,41.6"
+          Id="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract complete Time data"
+          TopLeft="415.999993801117,78.6000003427267" />
+        <NodeLayout
+          Size="97.6,41.6"
+          Id="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort"
+          TopLeft="170.999997451901,173.999997407198" />
+        <EdgeLayout
+          Id="Package\Update accm_txn_complete_time and txn_process_time_hours.Paths[OLE DB Source Output]"
+          TopLeft="216.199997809529,117.599998867512">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56.3999985396862"
+              Start="0,0"
+              End="0,48.8999985396862">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.8999985396862" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Update accm_txn_complete_time and txn_process_time_hours\Derived Column"
+          TopLeft="291.999995648861,330.999995067716" />
+        <NodeLayout
+          Size="167.2,41.6"
+          Id="Package\Update accm_txn_complete_time and txn_process_time_hours\OLE DB Command"
+          TopLeft="290.999995663762,405.999993950129" />
+        <EdgeLayout
+          Id="Package\Update accm_txn_complete_time and txn_process_time_hours.Paths[Derived Column Output]"
+          TopLeft="371.499995656311,372.599995067716">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.3999988824129"
+              Start="0,0"
+              End="0,25.8999988824129">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.8999988824129" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="106.4,41.6"
+          Id="Package\Update accm_txn_complete_time and txn_process_time_hours\Sort 1"
+          TopLeft="485.999992758036,171.999997437" />
+        <EdgeLayout
+          Id="Package\Update accm_txn_complete_time and txn_process_time_hours.Paths[OLE DB Source Output1]"
+          TopLeft="518.399993801117,120.200000342727">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="20.7999989569188,51.7999970942736"
+              Start="0,0"
+              End="20.7999989569188,44.2999970942736">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.8999985471368" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.8999985471368"
+                    Point2="0,25.8999985471368"
+                    Point3="4,25.8999985471368" />
+                  <mssgle:LineSegment
+                    End="16.7999989569188,25.8999985471368" />
+                  <mssgle:CubicBezierSegment
+                    Point1="16.7999989569188,25.8999985471368"
+                    Point2="20.7999989569188,25.8999985471368"
+                    Point3="20.7999989569188,29.8999985471368" />
+                  <mssgle:LineSegment
+                    End="20.7999989569188,44.2999970942736" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\Update accm_txn_complete_time and txn_process_time_hours\Merge Join"
+          TopLeft="338.999994948506,232.999996528029" />
+        <EdgeLayout
+          Id="Package\Update accm_txn_complete_time and txn_process_time_hours.Paths[Sort Output]"
+          TopLeft="268.599997451901,194.799997407198">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="70.399997496605,58.9999991208315"
+              Start="0,0"
+              End="62.899997496605,58.9999991208315">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="31.1999987483025,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="31.1999987483025,0"
+                    Point2="35.1999987483025,0"
+                    Point3="35.1999987483025,4" />
+                  <mssgle:LineSegment
+                    End="35.1999987483025,54.9999991208315" />
+                  <mssgle:CubicBezierSegment
+                    Point1="35.1999987483025,54.9999991208315"
+                    Point2="35.1999987483025,58.9999991208315"
+                    Point3="39.1999987483025,58.9999991208315" />
+                  <mssgle:LineSegment
+                    End="62.899997496605,58.9999991208315" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Update accm_txn_complete_time and txn_process_time_hours.Paths[Sort Output1]"
+          TopLeft="485.999992758036,192.799997437">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-82.1999978095294,40.1999990910292"
+              Start="0,0"
+              End="-82.1999978095294,32.6999990910292">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-78.1999978095294,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-78.1999978095294,0"
+                    Point2="-82.1999978095294,0"
+                    Point3="-82.1999978095294,4" />
+                  <mssgle:LineSegment
+                    End="-82.1999978095294,32.6999990910292" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Update accm_txn_complete_time and txn_process_time_hours.Paths[Merge Join Output]"
+          TopLeft="403.799994948506,274.59999652803">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-35.3999992996456,56.3999985396862"
+              Start="0,0"
+              End="-35.3999992996456,48.8999985396862">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.1999992698431" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.1999992698431"
+                    Point2="0,28.1999992698431"
+                    Point3="-4,28.1999992698431" />
+                  <mssgle:LineSegment
+                    End="-31.3999992996456,28.1999992698431" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-31.3999992996456,28.1999992698431"
+                    Point2="-35.3999992996456,28.1999992698431"
+                    Point3="-35.3999992996456,32.1999992698431" />
+                  <mssgle:LineSegment
+                    End="-35.3999992996456,48.8999985396862" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract Facttable data">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Update accm_txn_complete_time and txn_process_time_hours\Extract complete Time data">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

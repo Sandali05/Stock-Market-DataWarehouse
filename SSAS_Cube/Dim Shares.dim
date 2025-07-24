@@ -1,0 +1,337 @@
+﻿<Dimension xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="b7a20877-db45-4c00-955c-8e038f537273" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>Dim Shares</ID>
+  <Name>Dim Shares</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+      <Value>
+        <dds xmlns="">
+          <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="8" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-5822" scrolltop="-684" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="16383" y="13145" backcolor="2039583" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+            <font>
+              <ddsxmlobjectstreamwrapper binary="010000009001b0300100065461686f6d61" />
+            </font>
+            <mouseicon>
+              <ddsxmlobjectstreamwrapper binary="6c74000000000000" />
+            </mouseicon>
+          </diagram>
+          <layoutmanager>
+            <ddsxmlobj />
+          </layoutmanager>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="DimCompany" left="-488" top="6506" logicalid="4" controlid="1" masterid="0" hint1="0" hint2="0" width="4255" height="4826" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000e00009f100000da120000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dbo_DimCompany" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="DimShares" left="285" top="0" logicalid="5" controlid="2" masterid="0" hint1="0" hint2="0" width="3725" height="4106" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000e00008d0e00000a100000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dbo_DimShares" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="MSDDS.Polyline.080.1" left="140" top="3806" logicalid="6" controlid="3" masterid="0" hint1="0" hint2="0" width="799" height="3200" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobj>
+                <polyline endtypedst="6" endtypesrc="3" usercolor="16448250" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+              </ddsxmlobj>
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dataSet.Relations[DimShares-DimCompany]" vartype="8" />
+                <property name="Virtual" value="0" vartype="11" />
+                <property name="VisibleAP" value="0" vartype="3" />
+              </ddsxmlobj>
+            </layoutobject>
+            <connector lineroutestyle="MSDDS.Rectilinear" sourceid="1" destid="2" sourceattachpoint="2" destattachpoint="1" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+              <point x="539" y="6506" />
+              <point x="539" y="5306" />
+              <point x="497" y="5306" />
+              <point x="497" y="4106" />
+            </connector>
+          </ddscontrol>
+        </dds>
+      </Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>-5822</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>-684</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>-488</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+  <State>Unprocessed</State>
+  <Source xsi:type="DataSourceViewBinding" dwd:design-time-name="76112460-d5b2-4b1d-81d3-a118270f99d6">
+    <DataSourceViewID>Stock_Exchange_DW</DataSourceViewID>
+  </Source>
+  <UnknownMember>Visible</UnknownMember>
+  <ErrorConfiguration dwd:design-time-name="adf8f351-9477-42e2-923d-aafee9e918e5">
+    <KeyNotFound>ReportAndStop</KeyNotFound>
+    <KeyDuplicate>ReportAndStop</KeyDuplicate>
+    <NullKeyNotAllowed>ReportAndStop</NullKeyNotAllowed>
+  </ErrorConfiguration>
+  <CurrentStorageMode>Molap</CurrentStorageMode>
+  <Attributes>
+    <Attribute dwd:design-time-name="aa154391-0f81-406b-996e-6a152e6fa7db">
+      <ID>Shares SK</ID>
+      <Name>Shares SK</Name>
+      <Usage>Key</Usage>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="d494780b-4913-4b2a-ae97-89ebf25e4b71">
+          <DataType>Integer</DataType>
+          <NullProcessing>UnknownMember</NullProcessing>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="9098aca9-00d3-4748-af72-573ca586a8a3">
+            <TableID>dbo_DimShares</TableID>
+            <ColumnID>SharesSK</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="bf7a2ec6-12d6-41e3-b5a3-8652257010fd">
+          <AttributeID>Company SK</AttributeID>
+          <Name>Company SK</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="e7519d31-88d1-4a5b-bb95-7ce23174e89e">
+          <AttributeID>Shares Alternative ID</AttributeID>
+          <Name>Shares Alternative ID</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="f150d105-1237-4b9d-8047-944d463845f5">
+          <AttributeID>Stock Tricker</AttributeID>
+          <Name>Stock Tricker</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="450b2c8e-15fe-44c0-a47a-be7527d8ba83">
+          <AttributeID>Stock Type</AttributeID>
+          <Name>Stock Type</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="60bfbc72-122d-4b06-a91a-22a443934ea9">
+          <AttributeID>Company Name</AttributeID>
+          <Name>Company Name</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="a4389a93-dbe2-4902-89d6-0800e2d475a3">
+          <AttributeID>Sector</AttributeID>
+          <Name>Sector</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="f7b2f2d3-421b-40af-b97e-d055cd48bcd1">
+          <AttributeID>Country</AttributeID>
+          <Name>Country</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="93ba9a0a-c296-4b5c-8c23-c23216aefcbf">
+          <AttributeID>Ownership</AttributeID>
+          <Name>Ownership</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="98588c4e-439b-4fec-bfba-0280f608c996">
+          <AttributeID>Stae</AttributeID>
+          <Name>Stae</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="87b0ec77-7fd1-4f76-85c1-e3d1733d2b52">
+      <ID>Company SK</ID>
+      <Name>Company SK</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="da14d236-adda-494d-8e6f-2bfb2fd50073">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="e24906a6-c2f4-49f3-9107-e38a8d916921">
+            <TableID>dbo_DimCompany</TableID>
+            <ColumnID>CompanySK</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="590e72a2-e538-4a95-8847-78624362e338">
+      <ID>Shares Alternative ID</ID>
+      <Name>Shares Alternative ID</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="debc341a-47a5-48dd-95e0-98820eb553c3">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="ffe77df9-54b7-4e96-a742-ea99d30e865e">
+            <TableID>dbo_DimShares</TableID>
+            <ColumnID>SharesAlternativeID</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="37f0b446-d8c0-4daf-b467-f74fd4c3b155">
+      <ID>Stock Tricker</ID>
+      <Name>Stock Tricker</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="04779cef-0ca2-4645-aae8-35b15e9ae18b">
+          <DataType>WChar</DataType>
+          <DataSize>5</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="a276ab9e-3ed9-4ffc-8c7b-ca868fea535d">
+            <TableID>dbo_DimShares</TableID>
+            <ColumnID>StockTricker</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="ebbed7af-41a7-4e37-9c22-8dc832d36a14">
+      <ID>Stock Type</ID>
+      <Name>Stock Type</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="4bbea020-2401-43f9-89c2-88916d56535d">
+          <DataType>WChar</DataType>
+          <DataSize>5</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="df90ab89-d9e7-4eb4-bb01-9f2f9a49fe90">
+            <TableID>dbo_DimShares</TableID>
+            <ColumnID>StockType</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="96461443-f59b-431c-bf9a-ff2f713ad1ec">
+      <ID>Company Name</ID>
+      <Name>Company Name</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="223fb81d-89af-4b93-8c6b-e74301a0198c">
+          <DataType>WChar</DataType>
+          <DataSize>50</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="f7d5c7f1-8fbd-48e1-bb0b-d9fb87ec7b23">
+            <TableID>dbo_DimCompany</TableID>
+            <ColumnID>CompanyName</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="1f6ba06d-29b1-4212-b737-6be40d74d355">
+      <ID>Sector</ID>
+      <Name>Sector</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="0457e36c-fa96-46ef-ab3c-95025da0e121">
+          <DataType>WChar</DataType>
+          <DataSize>50</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="6c39d968-66fb-4aed-906d-a5bccb7c854b">
+            <TableID>dbo_DimCompany</TableID>
+            <ColumnID>Sector</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="58261b6b-3576-47b2-b130-07034a0735be">
+      <ID>Country</ID>
+      <Name>Country</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="dbb71368-47ca-4285-a7b0-f9e04ba739fa">
+          <DataType>WChar</DataType>
+          <DataSize>50</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="99ea988a-b856-47a5-9e72-61e5f523b972">
+            <TableID>dbo_DimCompany</TableID>
+            <ColumnID>Country</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="69560e74-4944-4a7d-a0e8-79cfacff828a">
+      <ID>Ownership</ID>
+      <Name>Ownership</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="9fb95e23-5d7a-40bc-8b77-859d3693465a">
+          <DataType>WChar</DataType>
+          <DataSize>50</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="c7f8a9c0-1b39-4f9c-a206-0fe3959d08a9">
+            <TableID>dbo_DimCompany</TableID>
+            <ColumnID>Ownership</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="a1ff21a9-8d9a-4ea8-b8cc-f099abf9b572">
+      <ID>Stae</ID>
+      <Name>Stae</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="159f1bfd-367a-4707-a0ac-eacd25255292">
+          <DataType>WChar</DataType>
+          <DataSize>50</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="6118ba35-f19a-47d1-8630-67600ab949db">
+            <TableID>dbo_DimCompany</TableID>
+            <ColumnID>Stae</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+  </Attributes>
+  <Hierarchies>
+    <Hierarchy dwd:design-time-name="6793bc20-3da3-4e4d-a1dd-2a0dffbd706a">
+      <ID>Hierarchy</ID>
+      <Name>OwnershipHierarchy</Name>
+      <Levels>
+        <Level dwd:design-time-name="c3c55417-65eb-4f97-84ae-fbf683b89563">
+          <ID>Ownership</ID>
+          <Name>Ownership</Name>
+          <SourceAttributeID>Ownership</SourceAttributeID>
+        </Level>
+        <Level dwd:design-time-name="948be97c-f6eb-4e65-ab4f-a61efdef6c16">
+          <ID>Country</ID>
+          <Name>Country</Name>
+          <SourceAttributeID>Country</SourceAttributeID>
+        </Level>
+        <Level dwd:design-time-name="9eb1fbe6-541b-4427-95d5-d2dea89af25e">
+          <ID>Stae</ID>
+          <Name>Stae</Name>
+          <SourceAttributeID>Stae</SourceAttributeID>
+        </Level>
+      </Levels>
+    </Hierarchy>
+  </Hierarchies>
+  <ddl300:ProcessingState>Unprocessed</ddl300:ProcessingState>
+</Dimension>
