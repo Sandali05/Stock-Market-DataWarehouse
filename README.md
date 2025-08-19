@@ -116,5 +116,5 @@ Stock-Market-DataWarehouse/
 ## 🙋 Author
 
 **Sandali Sewmini Karunarathna**  
-📧 sandalikaru123@gmail.com  
+sandalikaru123@gmail.com  
 
